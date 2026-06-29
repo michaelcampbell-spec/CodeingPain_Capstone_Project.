@@ -1,0 +1,9 @@
+#Any and all happenings on the azure platform.
+
+
+
+The account Credentials:
+for the azure portal.
+email:
+PW:
+
