@@ -26,6 +26,11 @@ resource "azurerm_application_gateway" "appgw" {
     capacity = 1 
   }
 
+  ssl_policy {
+    policy_type = "Predefined"
+    policy_name = "AppGwSslPolicy20220101"
+  }
+
   gateway_ip_configuration {
     name      = "gateway-ip-config"
     subnet_id = var.subnet_id

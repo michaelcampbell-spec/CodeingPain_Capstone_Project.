@@ -14,23 +14,31 @@ resource "azurerm_kubernetes_cluster" "aks" {
   default_node_pool {
     name           = "agentpool"
     node_count     = 1
-    vm_size        = "Standard_B2s" 
+    vm_size        = "Standard_B2s_v2"
     vnet_subnet_id = var.vnet_subnet_id
+
+    temporary_name_for_rotation = "tmpagentpool"
   }
 
   identity {
     type = "SystemAssigned" 
   }
+
+  network_profile {
+    network_plugin     = "azure"            
+    service_cidr       = "172.16.0.0/16"     # Clean, completely separated space for services
+    dns_service_ip     = "172.16.0.10"       # Must sit inside the service_cidr range
+  }
 }
 
-# 2. User Node Pool (Dedicated exclusively to Grafana, ArgoCD, and your Website)
-resource "azurerm_kubernetes_cluster_node_pool" "user_apps" {
-  name                  = "capstonepool"
-  kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
-  vm_size               = "Standard_B2s"
-  node_count            = 1
-  vnet_subnet_id        = var.vnet_subnet_id
-}
+# # 2. User Node Pool (Dedicated exclusively to Grafana, ArgoCD, and your Website)
+# resource "azurerm_kubernetes_cluster_node_pool" "user_apps" {
+#   name                  = "capstonepool"
+#   kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
+#   vm_size               = "Standard_B2ls_v2"
+#   node_count            = 1
+#   vnet_subnet_id        = var.vnet_subnet_id
+# }
 
 output "kube_config" {
   value     = azurerm_kubernetes_cluster.aks.kube_config
