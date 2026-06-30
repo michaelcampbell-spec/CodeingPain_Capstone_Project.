@@ -32,12 +32,12 @@ module "app_gateway" {
 
 
 data "azurerm_key_vault" "existing_kv" {
-  name                = "your-keyvault-name" # Replace with your actual Key Vault name
+  name                = "capstone-key-vault" 
   resource_group_name = data.azurerm_resource_group.rg.name
 }
 
 data "azurerm_key_vault_secret" "vm_password" {
-  name         = "runner-vm-password" # Replace with the exact Secret Name in Azure
+  name         = "capstone-vm-password"
   key_vault_id = data.azurerm_key_vault.existing_kv.id
 }
 
