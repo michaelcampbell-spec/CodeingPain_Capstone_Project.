@@ -2,7 +2,6 @@
 
 # 1. System Node Pool (Only runs Kubernetes system pods)
 resource "azurerm_kubernetes_cluster" "aks" {
-  automatic_upgrade_channel    = "patch"
   name                = "capstone-aks"
   dns_prefix          = "capstone-cluster-dns"
   image_cleaner_enabled        = true
