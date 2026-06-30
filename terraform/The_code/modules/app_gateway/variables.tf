@@ -1,22 +1,27 @@
-variable "appgw_name" {
-  type = string
-}
 variable "location" {
-  type = string
+  type        = string
+  description = "The Azure region for the Application Gateway."
 }
+
 variable "resource_group_name" {
-  type = string
+  type        = string
+  description = "The resource group where the gateway will be deployed."
 }
+
+variable "appgw_name" {
+  type        = string
+  description = "The name of the Application Gateway."
+}
+
 variable "subnet_id" {
-  type = string
+  type        = string
+  description = "The dedicated subnet ID passed from the network module output."
 }
-variable "backend_pools" {
-  type = map(object({
-    ip_addresses = list(string)
-  }))
-}
+
 variable "listeners" {
   type = map(object({
-    host_name = string
+    hostname = string
+    ip       = list(string)
   }))
+  description = "The application map passed down from the root variable."
 }
