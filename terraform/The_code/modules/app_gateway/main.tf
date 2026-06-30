@@ -42,7 +42,7 @@ resource "azurerm_application_gateway" "appgw" {
   }
 
   backend_http_settings {
-    name                  = "default-http-settings"
+    name                  = "capstone-http-settings"
     cookie_based_affinity = "Disabled"
     port                  = 80
     protocol              = "Http"
@@ -79,7 +79,7 @@ resource "azurerm_application_gateway" "appgw" {
       priority                   = 100 + index(keys(var.listeners), request_routing_rule.key)
       http_listener_name         = "${request_routing_rule.key}-listener"
       backend_address_pool_name  = "${request_routing_rule.key}-backend-pool"
-      backend_http_settings_name = "default-http-settings"
+      backend_http_settings_name = "capstone-http-settings"
     }
   }
 }
