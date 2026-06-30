@@ -7,7 +7,7 @@ variable "location" {
 variable "resource_group_name" {
   type        = string
   description = "The name of the target Resource Group."
-  default     = azurerm.resource_group.rg.name
+  default     = "capstone"
 }
 
 variable "apps" {
