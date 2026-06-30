@@ -24,3 +24,17 @@ The directory structure
 
 
 
+Credentials:
+
+	Azure Portal:
+ 	email: capstone_mtn@outlook.com
+ 	pw: Mentalist22!!
+
+	Azure Users:
+ 	Vidhaan:
+ 	vidhaan@capstonemtnoutlook.onmicrosoft.com
+ 	pw: Xanu816112
+
+ 	Phethego
+ 	phethego@capstonemtnoutlook.onmicrosoft.com
+ 	pw: Yujo088892
