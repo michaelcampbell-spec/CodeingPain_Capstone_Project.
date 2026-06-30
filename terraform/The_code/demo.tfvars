@@ -1,5 +1,5 @@
-location            = "East US"
-resource_group_name = "enterprise-demo-rg"
+location            = "southafricanorth"
+resource_group_name = "capstone"
 
 apps = {
   grafana = {
