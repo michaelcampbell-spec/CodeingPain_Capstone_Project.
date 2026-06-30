@@ -3,7 +3,6 @@ locals {
     managed_by = "terraform"
     module = "app_gateway"
   }
-
  
 }
 
@@ -52,7 +51,7 @@ resource "azurerm_application_gateway" "appgw" {
 
 # 1. Dynamic Backend Pools (One for each app)
   dynamic "backend_address_pool" {
-    for_each = var.apps
+    for_each = var.listeners
     content {
       name         = "${backend_address_pool.key}-backend-pool"
       ip_addresses = backend_address_pool.value.ip
@@ -61,7 +60,7 @@ resource "azurerm_application_gateway" "appgw" {
 
   # 2. Dynamic HTTP Listeners (One for each domain hostname)
   dynamic "http_listener" {
-    for_each = var.apps
+    for_each = var.listeners
     content {
       name                           = "${http_listener.key}-listener"
       frontend_ip_configuration_name = "frontend-ip"
@@ -73,11 +72,11 @@ resource "azurerm_application_gateway" "appgw" {
 
   # 3. Dynamic Routing Rules (Maps each listener to its specific backend pool)
   dynamic "request_routing_rule" {
-    for_each = var.apps
+    for_each = var.listeners
     content {
       name                       = "${request_routing_rule.key}-routing-rule"
       rule_type                  = "Basic"
-      priority                   = 100 + index(keys(var.apps), request_routing_rule.key)
+      priority                   = 100 + index(keys(var.listeners), request_routing_rule.key)
       http_listener_name         = "${request_routing_rule.key}-listener"
       backend_address_pool_name  = "${request_routing_rule.key}-backend-pool"
       backend_http_settings_name = "default-http-settings"

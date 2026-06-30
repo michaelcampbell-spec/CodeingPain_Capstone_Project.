@@ -1,42 +1,47 @@
-locals {
-  tags = {
-    managed_by = "terraform"
-    module = "vm"
-  }
-}
-resource "azurerm_network_interface" "nic" {
-  for_each = var.virtual_machines
-  name = "${each.key}-nic"
-  location = var.location
+resource "azurerm_public_ip" "runner_pip" {
+  name                = "runner-pip"
+  location            = var.location
   resource_group_name = var.resource_group_name
+  allocation_method   = "Static"
+  sku                 = "Standard"
+}
+
+resource "azurerm_network_interface" "runner_nic" {
+  name                = "runner-nic"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+
   ip_configuration {
-    name = "internal"
-    subnet_id = var.subnet_id
-    private_ip_address_allocation = each.value.private_ip_address_allocation
+    name                          = "internal"
+    subnet_id                     = var.subnet_id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.runner_pip.id
   }
-  tags = local.tags
 }
-resource "azurerm_linux_virtual_machine" "vm" {
-  for_each = var.virtual_machines
-  name = each.key
-  resource_group_name = var.resource_group_name
-  location = var.location
-  size = each.value.size
-  admin_username = var.admin_username
-  admin_password = var.admin_password
-  disable_password_authentication = false
+
+resource "azurerm_linux_virtual_machine" "runner" {
+  name                            = "github-runner-vm"
+  resource_group_name             = var.resource_group_name
+  location                        = var.location
+  size                            = "Standard_B1s"
+  
+  admin_username                  = var.admin_username
+  admin_password                  = var.admin_password
+  disable_password_authentication = false 
+
   network_interface_ids = [
-    azurerm_network_interface.nic[each.key].id
+    azurerm_network_interface.runner_nic.id,
   ]
+
   os_disk {
-    caching = "ReadWrite"
+    caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
+
   source_image_reference {
     publisher = "Canonical"
-    offer = "0001-com-ubuntu-server-jammy"
-    sku = "22_04-lts"
-    version = "latest"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts"
+    version   = "latest"
   }
-  tags = local.tags
 }

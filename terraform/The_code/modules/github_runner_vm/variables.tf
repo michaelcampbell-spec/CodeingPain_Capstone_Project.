@@ -9,14 +9,10 @@ variable "subnet_id" {
 }
 variable "admin_username" {
   type = string
+  description = "The VM administrator username retrieved from Key Vault."
 }
 variable "admin_password" {
-  type      = string
-  sensitive = true
-}
-variable "virtual_machines" {
-  type = map(object({
-    size = string
-    private_ip_address_allocation = string
-  }))
+  type        = string
+  description = "The VM administrator password retrieved from Key Vault."
+  sensitive   = true # Hides the value in your console terminal logs
 }

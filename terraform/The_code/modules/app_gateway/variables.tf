@@ -23,5 +23,5 @@ variable "listeners" {
     hostname = string
     ip       = list(string)
   }))
-  description = "The application map passed down from the root variable."
+  description = "The listener map passed down from the root variable."
 }
