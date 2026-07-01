@@ -4,7 +4,7 @@ resource_group_name = "capstone"
 apps = {
   grafana = {
     hostname = "grafana.capstone.com"
-    ip       = ["10.0.2.10"] # Replace with Grafana internal IP
+    ip       = ["10.0.2.33"] # Replace with Grafana internal IP
   }
   argocd = {
     hostname = "argocd.capstone.com"

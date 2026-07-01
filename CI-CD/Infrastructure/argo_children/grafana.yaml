@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://grafana.github.io/helm-charts' 
+    chart: grafana
+    targetRevision: 8.5.x
+    helm:
+      parameters:
+        - name: service.type
+          value: LoadBalancer
+          annotations:
+            service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+      values: |
+        assertNoLeakedSecrets: false
+        grafana.ini:
+          smtp:
+            enabled: true
+            host: smtp.gmail.com:587
+            user: vidhaanmohan.vm@gmail.com
+            password: mopzamtflwutjhsl
+            skip_verify: true
+            from_address: vidhaanmohan.vm@gmail.com
+            from_name: Grafana Alerts
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+

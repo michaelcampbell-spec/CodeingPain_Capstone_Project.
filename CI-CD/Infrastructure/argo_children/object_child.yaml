@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-workload
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:michaelcampbell-spec/CodeingPain_Capstone_Project.git'
+    targetRevision: test
+    path: CI-CD/Infrastructure/workloads
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+
