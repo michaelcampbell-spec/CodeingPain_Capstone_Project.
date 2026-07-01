@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'capstonemtnacr.azurecr.io' 
     chart: grafana/grafana
-    targetRevision: 8.5.x
+    targetRevision: 11.1.0
     helm:
       parameters:
         - name: service.type
