@@ -1,0 +1,11 @@
+# Local terraform execution caches
+.terraform/
+.terraform.lock.hcl
+
+# Local state management tracking files
+*.tfstate
+*.tfstate.backup
+
+# Sensitive variables files containing real presentation credentials
+*.tfvars
+*.tfvars.json

@@ -1,1 +1,9 @@
 #Everything about the terraform element of this project.
+
+#HOW TO ADD IP ADDR TO GATEWAY
+#     1. Add the grafana/argocd/web-page external ip addr to the demo.tfvars
+#     2. Hit terraform apply to update azure
+#     3. Get the app gateway frontend ip = 4.168.232.97
+#     4. Add app gateway frontend ip to /etc/hosts with the hostname from demo.tfvars
+#            4.168.232.97 argocd.capstone.com
+#     5. Test with http://argocd.capstone.com
