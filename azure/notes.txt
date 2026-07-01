@@ -1,9 +1,0 @@
-#Any and all happenings on the azure platform.
-
-#test cred edit
-
-The account Credentials:
-for the azure portal.
-email:
-PW:
-
