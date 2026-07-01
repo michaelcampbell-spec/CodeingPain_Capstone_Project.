@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: capstonemtnacr.azurecr.io 
+    repoURL: 'oci://capstonemtnacr.azurecr.io' 
     chart: grafana
     targetRevision: 8.5.x
     helm:
