@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'git@github.com:michaelcampbell-spec/CodeingPain_Capstone_Project.git'
     targetRevision: test
-    path: nginx
+    path: Infrastructure/workloads
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: default
