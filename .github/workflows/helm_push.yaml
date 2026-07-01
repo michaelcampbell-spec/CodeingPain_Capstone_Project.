@@ -17,6 +17,11 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v4
 
+    - name: Install Helm
+      uses: azure/setup-helm@v4
+      with:
+        version: 'latest'
+
     - name: Helm Repo Login
       run: |
         echo "${{ secrets.ACR_PASSWORD }}" | helm registry login ${{ env.containerRegistry }} --username ${{ secrets.ACR_USERNAME }} --password-stdin
