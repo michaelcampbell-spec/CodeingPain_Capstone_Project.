@@ -2,16 +2,27 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: grafana
-  namespace: #namespace
+  namespace: argocd
 spec:
   project: default
   source:
-    repoURL: # our git 
+    repoURL: capstonemtnacr.azurecr.io 
     chart: grafana
     targetRevision: 8.5.x
       parameters:
         - name: service.type
           value: ClusterIP
+      values: |
+        assertNoLeakedSecrets: false
+        grafana.ini:
+          smtp:
+            enabled: true
+            host: smtp.gmail.com:587
+            user: vidhaanmohan.vm@gmail.com
+            password: mopzamtflwutjhsl
+            skip_verify: true
+            from_address: vidhaanmohan.vm@gmail.com
+            from_name: Grafana Alerts
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: default

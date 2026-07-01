@@ -12,7 +12,7 @@ spec:
     targetRevision: test
     path: CI-CD/Infrastructure/argo_children
   destination:
-    server: 'https://kubernetes.default.svc/'
+    server: 'https://kubernetes.default.svc'
     namespace: argocd
   syncPolicy:
     automated:
