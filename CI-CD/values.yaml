@@ -1,0 +1,11 @@
+global:
+  image:
+    repository: capstonemtnacr.azurecr.io/argocd
+
+dex:
+  image:
+    repository: capstonemtnacr.azurecr.io/dex
+
+redis:
+  image:
+    repository: capstonemtnacr.azurecr.io/redis

@@ -1,1 +1,19 @@
 # all that was done on the CI pipeline as well as a running copy.
+
+
+Ran into a aks/gateway issue. 
+the correct fix is to add:
+ingress_application_gateway {
+  enabled    = true
+  gateway_id = azurerm_application_gateway.appgw.id
+}
+to the aks module in terraform. 
+
+I went with a quick cli fix insted.
+az aks enable-addons --resource-group capstone --name capstone-aks --addons ingress-appgw --appgw-id /subscriptions/2da65eaf-abaf-497d-95a1-a637a8515b90/resourceGroups/capstone/providers/Microsoft.Network/applicationGateways/capstone-appgw
+
+
+
+az aks disable-addons --addons ingress-appgw --name capstone-aks --resource-group capstone
+
+az aks enable-addons --name capstone-aks --resource-group capstone --addons ingress-appgw --appgw-id $APPGW_ID
