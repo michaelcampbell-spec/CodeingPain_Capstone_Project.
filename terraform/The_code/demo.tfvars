@@ -8,7 +8,7 @@ apps = {
   }
   argocd = {
     hostname = "argocd.capstone.com"
-    ip       = ["10.0.2.11"] # Replace with ArgoCD internal IP
+    ip       = ["10.0.2.50"] # Replace with ArgoCD internal IP
   }
   website = {
     hostname = "www.capstone.com"
