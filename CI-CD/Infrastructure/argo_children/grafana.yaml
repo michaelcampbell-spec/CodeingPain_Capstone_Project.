@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'capstonemtnacr.azurecr.io' 
-    chart: grafana
+    chart: grafana/grafana
     targetRevision: 8.5.x
     helm:
       parameters:
