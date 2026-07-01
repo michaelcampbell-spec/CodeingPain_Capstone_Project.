@@ -12,9 +12,7 @@ spec:
     helm:
       parameters:
         - name: service.type
-          value: LoadBalancer
-          annotations:
-            service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+          value: ClusterIP
       values: |
         assertNoLeakedSecrets: false
         grafana.ini:
