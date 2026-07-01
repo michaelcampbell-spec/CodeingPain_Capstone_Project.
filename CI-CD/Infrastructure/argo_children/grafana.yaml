@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'capstonemtnacr.azurecr.io' 
+    repoURL: 'https://grafana.github.io/helm-charts' 
     chart: grafana/grafana
-    targetRevision: 11.1.0
+    targetRevision: 8.5.x
     helm:
       parameters:
         - name: service.type
