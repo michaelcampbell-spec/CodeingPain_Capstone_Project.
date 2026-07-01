@@ -9,6 +9,7 @@ spec:
     repoURL: capstonemtnacr.azurecr.io 
     chart: grafana
     targetRevision: 8.5.x
+    helm:
       parameters:
         - name: service.type
           value: ClusterIP
