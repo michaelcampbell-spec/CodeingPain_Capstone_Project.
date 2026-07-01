@@ -9,8 +9,8 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:michaelcampbell-spec/CodeingPain_Capstone_Project.git'
-    targetRevision: HEAD
-    path: Infrastructure/argo_children
+    targetRevision: test
+    path: CI-CD/Infrastructure/argo_children
   destination:
     server: 'https://kubernetes.default.svc/'
     namespace: argocd
