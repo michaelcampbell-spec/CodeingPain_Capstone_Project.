@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: git@github.com:michaelcampbell-spec/CodeingPain_Capstone_Project.git
-    chart: prometheus
-    targetRevision: version
+    repoURL: capstonemtnacr.azurecr.io
+    chart: helm/kube-prometheus-stack
+    targetRevision: 61.3.0
     helm:
       parameters:
         - name: alertmanager.enabled
