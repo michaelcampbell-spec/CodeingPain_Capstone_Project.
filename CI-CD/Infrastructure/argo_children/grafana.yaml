@@ -13,6 +13,8 @@ spec:
       parameters:
         - name: service.type
           value: ClusterIP
+          annotations:
+            service.beta.kubernetes.io/azure-load-balancer-internal: "true"
       values: |
         assertNoLeakedSecrets: false
         grafana.ini:
