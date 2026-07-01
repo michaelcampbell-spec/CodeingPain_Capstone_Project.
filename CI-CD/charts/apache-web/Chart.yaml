@@ -1,0 +1,6 @@
+apiVersion: v2
+name: apache-web
+description: A custom, lightweight Apache Web Server chart
+type: application
+version: 0.1.0
+appVersion: "2.4"
