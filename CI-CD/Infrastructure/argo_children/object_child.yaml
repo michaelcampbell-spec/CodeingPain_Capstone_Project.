@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-workload
+  namespace: #namespace
+spec:
+  project: default
+  source:
+    repoURL: #our git'
+    targetRevision: HEAD
+    path: /nginx
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+

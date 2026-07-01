@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus
+  namespace: #namespace.
+spec:
+  project: default
+  source:
+    repoURL: # new repo
+    chart: prometheus
+    targetRevision: version
+    helm:
+      parameters:
+        - name: alertmanager.enabled
+          value: "false"
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

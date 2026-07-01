@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: second-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: second-nginx
+  template:
+    metadata:
+      labels:
+        app: second-nginx
+    spec:
+#      affinity:
+#        nodeAffinity:
+#          requiredDuringSchedulingIgnoredDuringExecution:
+#            nodeSelectorTerms:
+#              - matchExpressions:
+#                  - key: node-role.kubernetes.io/worker
+#                    operator: In
+#                    values:
+#                      - "true"
+      containers:
+        - name: second-nginx
+          image: mec94/nginx-probable-cus:latest
+#          resources:
+#            limits:
+#              memory: "256Mi"
+#              cpu: "1"
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            exec:
+              command:
+              - cat
+              - /file.html
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            failureThreshold: 2
