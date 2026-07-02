@@ -17,22 +17,19 @@ spec:
             service.beta.kubernetes.io/azure-load-balancer-internal: "true"
       values: |
         assertNoLeakedSecrets: false
-        env:
+        envValueFrom:
           GF_SMTP_USER:
-            valueFrom:
-              secretKeyRef:
-                name: grafana-smtp-secret
-                key: user
+            secretKeyRef:
+              name: grafana-smtp-secret
+              key: user
           GF_SMTP_PASSWORD:
-            valueFrom:
-              secretKeyRef:
-                name: grafana-smtp-secret
-                key: password
+            secretKeyRef:
+              name: grafana-smtp-secret
+              key: password
           GF_SMTP_FROM_ADDRESS:
-            valueFrom:
-              secretKeyRef:
-                name: grafana-smtp-secret
-                key: user
+            secretKeyRef:
+              name: grafana-smtp-secret
+              key: user
         grafana.ini:
           smtp:
             enabled: true
