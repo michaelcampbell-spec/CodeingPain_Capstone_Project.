@@ -10,12 +10,16 @@ spec:
     chart: grafana
     targetRevision: 8.5.x
     helm:
-      parameters:
-        - name: service.type
-          value: LoadBalancer
+      # parameters:
+       # - name: service.type
+        #  value: LoadBalancer
+         # annotations:
+          #  service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+      values: |
+        service:
+          type: LoadBalancer
           annotations:
             service.beta.kubernetes.io/azure-load-balancer-internal: "true"
-      values: |
         assertNoLeakedSecrets: false
         envValueFrom:
           GF_SMTP_USER:
