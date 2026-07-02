@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: second-nginx
+  name: website-deploy
 spec:
   replicas: 1
   selector:
