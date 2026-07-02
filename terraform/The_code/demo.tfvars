@@ -12,6 +12,6 @@ apps = {
   }
   website = {
     hostname = "www.capstone.com"
-    ip       = ["10.0.2.33"] # Replace with Website internal IP
+    ip       = ["10.0.2.85"] # Replace with Website internal IPs
   }
 }
