@@ -16,6 +16,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     node_count     = 1
     vm_size        = "Standard_B2s_v2"
     vnet_subnet_id = var.vnet_subnet_id
+    max_pods = 80 #Testing if grafana pods will deploy on the system node pool, if not, we will create a user node pool for the apps
 
     temporary_name_for_rotation = "tmpagentpool"
   }

@@ -27,7 +27,7 @@ resource "helm_release" "argocd" {
         - --insecure
       service:
         type: LoadBalancer
-        loadBalancerIP: 10.0.2.50
+        loadBalancerIP: 10.0.2.83
         annotations:
           service.beta.kubernetes.io/azure-load-balancer-internal: "true"
     EOT
