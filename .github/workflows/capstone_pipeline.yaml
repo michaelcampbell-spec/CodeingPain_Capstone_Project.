@@ -1,0 +1,33 @@
+name: Automated ACR Helm Push Pipeline
+on:
+  push:
+    branches:
+      - helm-charts
+env:
+  ACR_NAME: capstonemtnacr
+jobs:
+  build-and-push-chart:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Authenticate Helm to ACR
+        run: |
+          USER_NAME="00000000-0000-0000-0000-000000000000"
+          PASSWORD=$(az acr login --name ${{ env.ACR_NAME }} --expose-token --output tsv --query accessToken)
+          echo "$PASSWORD" | helm registry login ${{ env.ACR_NAME }}.azurecr.io --username $USER_NAME --password-stdin
+      - name: Discover, Package, and Push All Charts
+        run: |
+          find . -name "Chart.yaml" -exec dirname {} \; | while read -r chart_dir; do
+            CHART_NAME=$(yq eval '.name' "$chart_dir/Chart.yaml")
+            CHART_VERSION=$(yq eval '.version' "$chart_dir/Chart.yaml")
+            if ! helm show chart oci://${{ env.ACR_NAME }}.azurecr.io/charts/$CHART_NAME --version "$CHART_VERSION" > /dev/null 2>&1; then
+              helm package "$chart_dir" --destination .
+              helm push "$CHART_NAME-$CHART_VERSION.tgz" oci://${{ env.ACR_NAME }}.azurecr.io/charts
+              rm "$CHART_NAME-$CHART_VERSION.tgz"
+            fi
+          done
