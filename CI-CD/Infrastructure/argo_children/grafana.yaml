@@ -20,16 +20,6 @@ spec:
           type: LoadBalancer
           annotations:
             service.beta.kubernetes.io/azure-load-balancer-internal: "true"
-<<<<<<< HEAD
-      values: |
-        service:
-          type: LoadBalancer
-          annotations:
-            service.beta.kubernetes.io/azure-load-balancer-internal: "true"
-
-            
-=======
->>>>>>> d7d02f937123be3cbd144b4ef4e354ea5e61df4d
         assertNoLeakedSecrets: false
         envValueFrom:
           GF_SMTP_USER:
